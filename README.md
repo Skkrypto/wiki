@@ -1,0 +1,2 @@
+# wiki
+The Skkrypto Wiki
