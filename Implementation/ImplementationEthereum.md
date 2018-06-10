@@ -42,7 +42,7 @@
 `pragma solidity ^0.4.24;`
 
 - 환경 구축
-   - Text editor + Plug-in
+   - Text editor + Extension
       - Sublime
       - Atom
       - VS Code
