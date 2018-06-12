@@ -1,0 +1,29 @@
+site_name: Skkrypto Wiki
+site_description:
+site_author: skkrypto
+repo_url: https://github.com/Skkrypto/wiki
+
+theme:
+  name: 'material'
+  language: 'kr'
+
+extra:
+  palette:
+    primary: 'Blue Grey'
+    accent: 'Pink'
+  social:
+    - type: github
+      link: https://github.com/skkrypto
+
+plugins:
+  - search:
+      lang: 'en, jp, kr'
+  - awesome-pages:
+      filename: .index
+
+markdown_extensions:
+  - admonition
+  - codehilite(guess_lang=false,linenums=false)
+  - toc(permalink=true)
+  - footnotes
+  - meta
