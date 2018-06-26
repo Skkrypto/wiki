@@ -29,7 +29,7 @@ nvm —-version
 ```
 
 4. NVM을 통해 LTS 버젼의 Node를 설치한다. 
-````
+```
 nvm install --lts
 ```
 
