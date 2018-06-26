@@ -4,6 +4,7 @@
 Hyperledger Composer는 Hyperledger Fabric를 지원하는 블록체인 개발도구이자 프레임워크입니다.  Playground라는 GUI를 통해 쉽게 블록체인 어플리케이션 제작이 가능하고, CLI를 통해서도 제작이 가능해 Hyperledger 진영에서 빼놓을 수 없는 필수 도구입니다. 그리고 이 도구를 설치하는 이유 중 하나로 덤으로 Fabric를 정말 쉽게 설치할 수 있다는 점이 있습니다.
 
 
+
 ## 준비 사항
 - OS X 10.12.6 이상
 - **Python 2.7.X (2.7.14 구동 확인)** 
@@ -18,19 +19,29 @@ Hyperledger Composer는 Hyperledger Fabric를 지원하는 블록체인 개발�
 1. 먼저 맥 앱스토어를 통해 Xcode를 설치한다. 용량이 10GB가 넘어가므로 미리 설치해두면 좋다.
 
 2. 아래의 명령어로 NVM을 설치한다.  공식문서에선 v0.33.0을 설치하는데 2018년 6월 현재 v0.33.11이 최신이다. 혹시 모르니 공식문서 버젼대로 설치한 후 나중에 업데이트를 해보도록 하자.
-`curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash`
+```
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+```
 
 3. 버젼을 확인한다. v0.33.0 이 나온다면 정상
-`nvm —-version`
+```
+nvm —-version
+```
 
 4. NVM을 통해 LTS 버젼의 Node를 설치한다. 
-`nvm install --lts`
+````
+nvm install --lts
+```
 
 5. LTS를 사용하는 것으로 전환한다.
-`nvm use --lts`
+```
+nvm use --lts
+```
 
 6. Node 버젼을 확인한다. 앞자리수로 짝수 나오면 정상
-`node --version`
+```
+node --version
+```
 
 7. Docker를 다운받아 설치한다.
 [Install Docker for Mac | Docker Documentation](https://docs.docker.com/docker-for-mac/install/)
@@ -41,6 +52,9 @@ Hyperledger Composer는 Hyperledger Fabric를 지원하는 블록체인 개발�
 9. VS Code의 Extension 탭에서 hyperledger composer를 검색하여 나오는 최상단의 Extension을 설치한다. 
 
 참고: [Installing pre-requisites | Hyperledger Composer](https://hyperledger.github.io/composer/latest/installing/installing-prereqs.html)
+
+
+
 
 ## 설치
 ### Step 1: Composer CLI Tool 설치
@@ -54,15 +68,16 @@ npm install -g generator-hyperledger-composer
 npm install -g yo
 ```
 
-- Troubleshooting: 오류가 분명 많이 나온다. 
-> Python 3.6을 사용하여 나오는 오류  
+> Troubleshooting: 오류가 분명 많이 나온다.   
+
+1. Python 3.6을 사용하여 나오는 오류
 Mac의 경우 Pyenv나 Conda ENV 등 평소 사용하는 Python 버젼 관리 툴을 이용해 2.7로 환경을 바꾸어주면 편하다. 아직 설치를 하지 않았다면 Pyenv 사용을 적극 권한다.
 적어도 Virtualenv까진 해주면 정말 편리하다. 
 
 [파이썬 가상 개발 환경 구성: pyenv, virtualenv, autoenv, pip](http://taewan.kim/post/python_virtual_env/)
 
 
-> Error: c++: error: unrecognized command line option '-stdlib=libc++' installing node lib  
+2. Error: c++: error: unrecognized command line option '-stdlib=libc++' installing node lib
 Python 2.7로 바꾸어서 해당 오류는 나지 않지만 여전히 실패하는 경우가 있다. 오류코드를 보다가 해당 오류가 나온다면 아래와 같이 CXX=clang++ 를 앞에 붙여서 3가지를 설치해보자.
 
 ```
@@ -71,10 +86,14 @@ CXX=clang++ npm install -g composer-rest-server
 CXX=clang++ npm install -g generator-hyperledger-composer
 ```
 
+
+
 ### Step 2: Playground 설치
 ```
 npm install -g composer-playground
 ```
+
+
 
 ### Step 3: Hyperledger Fabric 설치
 
@@ -91,6 +110,7 @@ tar -xvf fabric-dev-servers.tar.gz
 cd ~/fabric-dev-servers
 ./downloadFabric.sh
 ```
+
 
 
 ## 개발환경 Control
@@ -115,6 +135,7 @@ cd ~/fabric-dev-servers
 # 개발을 마친 후 Teardown을 하기 위해
 ./teardownFabric.sh
 ```
+
 
 ### Playground 실행하기
 
