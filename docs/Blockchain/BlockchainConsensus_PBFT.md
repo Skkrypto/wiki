@@ -160,7 +160,7 @@ Tendermint는 Propose, Prevote, Precommit 과정을 거쳐 블록을 생성합�
 ## Reference
 
 - Byzantine Fault Tolerance - en.wikipedia
-- A Brief tour of FLP Impossibility
+- A Brief tour of FLP Impossibility (<http://www.the-paper-trail.org/post/2008-08-13-a-brief-tour-of-flp-impossibility/>>
 - 2018.05.23 Kodebox 세미나 - BFT Consensus Algorithm
 - Distributed Systems courses L6 - Byzantine Fault tolerance
   (https://www.youtube.com/watch?v=_e4wNoTV3Gw&t=36s) 
