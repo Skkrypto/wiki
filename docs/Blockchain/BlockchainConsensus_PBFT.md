@@ -77,7 +77,7 @@ PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해
 ​     
 
 3. 네트워크 내 임의의 Backup 노드 i가 Pre-prepare 메시지를 받고, D(m)과 V, N이 서로 대응되는 값인지 검증합니다. 만약 검증 결과 서로 대응되지 않는 값이라면 Pre-prepare 메시지를 수용하지 않습니다. 검증 결과가 참이라면, Prepare 메시지를 생성해 네트워크의 나머지 모든 노드에게 전송합니다.  
-- Prepare 메시지는 <Prepare, V, N, D(m), i> 형태입니다. V와 N, D(m)은 Pre-prepare에서 받은 값과 동일하며, i는 Pre-prepare 메시지를 검증한 Backup노드의 번호라고 이해하면 되겠습니다. 즉 모든 노드가 메시지를 검증하고, 검증한 결과가 참일 경우 모든 노드에게 Prepare라는 이름의 메시지를 전송합니다.
+   - Prepare 메시지는 <Prepare, V, N, D(m), i> 형태입니다. V와 N, D(m)은 Pre-prepare에서 받은 값과 동일하며, i는 Pre-prepare 메시지를 검증한 Backup노드의 번호라고 이해하면 되겠습니다. 즉 모든 노드가 메시지를 검증하고, 검증한 결과가 참일 경우 모든 노드에게 Prepare라는 이름의 메시지를 전송합니다.
 
 ​     
 
