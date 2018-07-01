@@ -64,7 +64,7 @@ PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해
 
 
 ![k-308](https://user-images.githubusercontent.com/26548454/42135090-76b1f026-7d81-11e8-8134-ec46f48c981d.jpg)
-\[그림2 - PBFT 합의 알고리즘 설명. 출처: Kodebox ]
+\[그림2 - PBFT 합의 알고리즘 설명. 출처: Kodebox 세미나 자료]
 
 <br>
 
