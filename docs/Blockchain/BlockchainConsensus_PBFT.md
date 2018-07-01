@@ -45,7 +45,7 @@
 <br>
 <br>
 
-### PBFT란??
+## PBFT란??
 
 Safety를 확보하고 Liveness를 일부 희생하면서, 비동기 네트워크에서도 합의를 이룰 수 있는 알고리즘이 바로 Practical Byzantine Fault Tolerance, PBFT입니다. 즉 네트워크에 배신자 노드가 어느 정도 있다고 해도 네트워크 내에서 이루어지는 합의의 신뢰를 보장하는 알고리즘입니다. 현재까지 블록체인 합의 알고리즘 중 BFT 방식을 채택했다고 하는 경우 대부분 PBFT 합의 알고리즘을 바탕으로 조금씩 변형을 가했다고 볼 수 있습니다. 대표적으로 Tendermint는 PBFT에 DPoS 합의 알고리즘을 결합했으며, 이더리움 Casper는 PoW 방식의 채굴 위에 PoS + PBFT 형태의 블록 검증 시스템을 제안했습니다. 이외에도 PBFT는 Hyperledger Fabric, R3, Ripple, EOS에 이르기까지 Public과 Private을 가리지 않고 다양한 블록체인에서 사용되고 있습니다.
 
