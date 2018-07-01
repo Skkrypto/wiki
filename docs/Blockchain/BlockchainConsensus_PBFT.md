@@ -59,12 +59,12 @@ PBFT를 간단히 요약하자면, 비동기 네트워크에서 배신자 노드
 ### PBFT 합의 알고리즘 절차 쉽게 이해하기
 
 PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해해 보겠습니다. MIGUEL CASTRO, BARBARA LISKOV 의 논문 "Practical Byzantine Fault Tolerance and Proactive Recovery" 의 내용을 바탕으로 이해했으며, 비잔틴 노드(배신자 노드)의 개수가 최대 f일 때, 전체 네트워크 노드 수가 3f+1개라는 전제로 절차가 진행됩니다.
-
+<br>
 
 
 ![k-308](https://user-images.githubusercontent.com/26548454/42135090-76b1f026-7d81-11e8-8134-ec46f48c981d.jpg)
 
-
+<br>
 
 1. 클라이언트가 상태 변환을 요청하는 Request 메시지 m을 Primary Node에 전송합니다. 논문에서는 처음 상태변환 요청을 받은 노드를 Primary로, Primary를 제외한 네트워크 나머지 노드를 Backup이라고 칭합니다. 그림에서는 0번 노드를 의미합니다.
 
@@ -77,7 +77,7 @@ PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해
 ​     
 
 3. 네트워크 내 임의의 Backup 노드 i가 Pre-prepare 메시지를 받고, D(m)과 V, N이 서로 대응되는 값인지 검증합니다. 만약 검증 결과 서로 대응되지 않는 값이라면 Pre-prepare 메시지를 수용하지 않습니다. 검증 결과가 참이라면, Prepare 메시지를 생성해 네트워크의 나머지 모든 노드에게 전송합니다.  
-4. - Prepare 메시지는 <Prepare, V, N, D(m), i> 형태입니다. V와 N, D(m)은 Pre-prepare에서 받은 값과 동일하며, i는 Pre-prepare 메시지를 검증한 Backup노드의 번호라고 이해하면 되겠습니다. 즉 모든 노드가 메시지를 검증하고, 검증한 결과가 참일 경우 모든 노드에게 Prepare라는 이름의 메시지를 전송합니다.
+- Prepare 메시지는 <Prepare, V, N, D(m), i> 형태입니다. V와 N, D(m)은 Pre-prepare에서 받은 값과 동일하며, i는 Pre-prepare 메시지를 검증한 Backup노드의 번호라고 이해하면 되겠습니다. 즉 모든 노드가 메시지를 검증하고, 검증한 결과가 참일 경우 모든 노드에게 Prepare라는 이름의 메시지를 전송합니다.
 
 ​     
 
@@ -95,7 +95,7 @@ PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해
 ​     
 
 "prepared certificate"와 "commit certificate" 두 가지가 모두 있을 경우 해당 노드는 “committed certificate”가 되며, 클라이언트가 요청한 request를 수용해 상태 변화 함수를 시행합니다. 즉 네트워크의 합의 알고리즘이 작동하여 합의를 도출합니다. Request를 수용할 경우 네트워크 어느 노드에서도 상태 변화를 수용했기 때문에 Safety를 충족합니다. 하지만 네트워크 합의 요건을 충족하지 못한 request는 기각하기 때문에 Liveness를 일부 희생했다고 이해할 수 있습니다.
-
+<br>
 
 
 ### PBFT 합의 절차 - 두 번의 절차를 걸쳐서 합의해야만 하는 이유?
@@ -103,7 +103,7 @@ PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해
 비동기 네트워크에서 한 번의 절차로만 합의를 시행할 경우, 배신자 노드가 합의 알고리즘의 Safety를 파괴할 수 있습니다.
 
 4개의 노드가 존재하는 네트워크를 가정해 보겠습니다.
-
+<br>
 ![k-308 2](https://user-images.githubusercontent.com/26548454/42135099-93926112-7d81-11e8-8bfc-bbf4336e6f43.jpg)
 <br>
 노드1이 블록 B1을 생성하고 모든 네트워크에게 전파했습니다. 그리고 노드1과 노드2는 해당 블록을 검증한 결과를 노드1, 2, 3, 4에게서 전부 받았습니다. 그런데 노드3과 노드4는 모종의 이유로 나머지 노드들의 검증 결과를 받지 못했다고 가정해 보겠습니다. PBFT 알고리즘이라면, 노드3과 노드4에서는 prepared certificate 상태에 도달하지 못해 commit 메시지를 보내지 못합니다. commit 메시지가 과반수에 미치지 못하므로 블록1은 commit되지 못합니다.
