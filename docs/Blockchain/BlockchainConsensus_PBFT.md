@@ -12,7 +12,7 @@
 <bR>
 
 
-### PBFT 이해를 위한 사전지식 - FLP Impossibility
+## PBFT 이해를 위한 사전지식 - FLP Impossibility
 
 어떤 합의 알고리즘이 네트워크에서 통용되기 위해선 **Safety**와 **Liveness**라는 특성을 가지고 있어야 합니다. Safety의 의미는 “문제 없는 노드들 사이에서는 잘못된 합의가 이루어지지 않는다”입니다. 실용적인 의미로는 ‘노드 간 합의가 발생했다면, 어느 노드가 접근하든 그 값은 동일해야 한다’로 이해해도 좋습니다. Liveness는 “Transaction과 같은 합의 대상에 문제가 없다면 반드시 합의가 이루어진다”라는 의미입니다. 
 <Br>
@@ -57,7 +57,7 @@ PBFT를 간단히 요약하자면, 비동기 네트워크에서 배신자 노드
 
 
 
-### PBFT 합의 알고리즘 절차 쉽게 이해하기
+## PBFT 합의 알고리즘 절차 쉽게 이해하기
 
 PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해해 보겠습니다. MIGUEL CASTRO, BARBARA LISKOV 의 논문 "Practical Byzantine Fault Tolerance and Proactive Recovery" 의 내용을 바탕으로 이해했으며, 비잔틴 노드(배신자 노드)의 개수가 최대 f일 때, 전체 네트워크 노드 수가 3f+1개라는 전제로 절차가 진행됩니다.
 <br>
@@ -100,7 +100,7 @@ PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해
 <br>
 
 
-### PBFT 합의 절차 - 두 번의 절차를 걸쳐서 합의해야만 하는 이유?
+## PBFT 합의 절차 - 두 번의 절차를 걸쳐서 합의해야만 하는 이유?
 
 비동기 네트워크에서 한 번의 절차로만 합의를 시행할 경우, 배신자 노드가 합의 알고리즘의 Safety를 파괴할 수 있습니다.
 
@@ -132,7 +132,7 @@ PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해
 
 
 
-### PBFT 합의 알고리즘을 블록체인에 적용한 사례
+## PBFT 합의 알고리즘을 블록체인에 적용한 사례
 
 PBFT 알고리즘을 블록의 합의에 적용한 대표적인 사례로는 Tendermint를 들 수 있습니다. Tendermint 합의 알고리즘을 분석하기에는 글이 너무 길어져서, 이번 글에서는 Tendermint의 합의 알고리즘이 PBFT의 각각 어느 부분에 대응되는지 설명하겠습니다.
 
@@ -151,13 +151,13 @@ Tendermint는 Propose, Prevote, Precommit 과정을 거쳐 블록을 생성합�
 
 
 
-### Conclusion
+## Conclusion
 
 꽤 긴 지면을 할애해 PBFT 합의 알고리즘을 설명했습니다. 최대한 간명하게 풀어보았으나, 컴퓨터공학이나 분산컴퓨팅 비전공자 입장에서 논문을 읽고 이해한 내용이다 보니 설명이 부족하거나 명확하지 못한 부분이 있을 거라고 생각합니다. 학술적인 차원에서 깊게 이해하기엔 부족한 글이지만, PBFT 합의 알고리즘이 어떤 것인지 맥을 잡기에는 조금이나마 도움이 되셨으면 합니다. 감사합니다.
 
 
 
-### Reference
+## Reference
 
 - Byzantine Fault Tolerance - en.wikipedia
 - A Brief tour of FLP Impossibility
