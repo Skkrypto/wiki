@@ -2,7 +2,8 @@
 
 # [케블리] #48. PBFT 합의 알고리즘 이해하기
 
-
+![consensus](https://user-images.githubusercontent.com/26548454/42135259-83122f5a-7d83-11e8-8499-f5df2b7848d4.jpg)
+\[그림1 - Consensus]
 
 케블리 #44 글에서 ‘합의 알고리즘 마스터하기 - PoW, PoS’를 다루었습니다. (<https://steemit.com/kr/@kblock/44-1-pow-pos>) PoW와 PoS 모두 블록체인이라는 분산 원장 시스템에서 노드 간 합의를 이루는 새로운 방법입니다. 특히 비트코인이 제시한 합의 알고리즘은 ‘Nakamoto Consensus’라고도 불릴 만큼, 종전 컴퓨터과학의 합의 알고리즘에서는 시도한 적 없던 방법이었습니다.
 
@@ -63,6 +64,7 @@ PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해
 
 
 ![k-308](https://user-images.githubusercontent.com/26548454/42135090-76b1f026-7d81-11e8-8134-ec46f48c981d.jpg)
+\[그림2 - PBFT 합의 알고리즘 설명. 출처: Kodebox ]
 
 <br>
 
@@ -105,6 +107,7 @@ PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해
 4개의 노드가 존재하는 네트워크를 가정해 보겠습니다.
 <br>
 ![k-308 2](https://user-images.githubusercontent.com/26548454/42135099-93926112-7d81-11e8-8bfc-bbf4336e6f43.jpg)
+\[그림3 - 한 번의 합의절차만을 전제로 한 합의 알고리즘의 의사결정단계_1 출처: Kodebox 세미나 ]
 <br>
 노드1이 블록 B1을 생성하고 모든 네트워크에게 전파했습니다. 그리고 노드1과 노드2는 해당 블록을 검증한 결과를 노드1, 2, 3, 4에게서 전부 받았습니다. 그런데 노드3과 노드4는 모종의 이유로 나머지 노드들의 검증 결과를 받지 못했다고 가정해 보겠습니다. PBFT 알고리즘이라면, 노드3과 노드4에서는 prepared certificate 상태에 도달하지 못해 commit 메시지를 보내지 못합니다. commit 메시지가 과반수에 미치지 못하므로 블록1은 commit되지 못합니다.
 
@@ -113,7 +116,8 @@ PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해
 만약 certificate 한 번 만으로 commit을 할 수 있다고 가정해 보겠습니다. 여기서 노드2가 배신자 노드일 경우, 노드2는 다음과 같은 행동이 가능합니다.
 
 ![k-309](https://user-images.githubusercontent.com/26548454/42135112-a409c328-7d81-11e8-9dba-c7c983eb8c07.jpg)
-
+\[그림4 - 한 번의 합의절차만을 전제로 한 합의 알고리즘의 의사결정단계_2 출처: Kodebox 세미나 자료]
+<br>
 - 먼저 노드1에게는 블록1을 Commit 합니다. 이제 노드1은 R2 단계에서의 블록은 블록1이라고 간주하게 됩니다.
 - 합의에 도달할 투표수가 부족한 노드3과 노드4에게는 새로운 블록2를 제안합니다. 노드3과 4는 블록1이 유효성 검증을 받지 못해 탈락한 것으로 알고, 노드2과 같이 블록2의 유효성 검증을 진행합니다.
 - 노드2, 3, 4 모두 블록2의 유효성 검증을 마치고 certificate를 얻었기에 블록2를 Commit합니다. 이제 노드 3, 4는 R2 단계의 블록은 블록2라고 간주하게 됩니다.
@@ -133,7 +137,7 @@ PBFT 알고리즘을 블록의 합의에 적용한 대표적인 사례로는 Ten
 
 
 ![consensus_logic](https://user-images.githubusercontent.com/26548454/42135120-b1dd6892-7d81-11e8-8dfc-6d45e59b8f9e.png)
-
+\[그림5 - Tendermint의 블록 생성 과정 출처: Tendermint readthedocs]
 
 
 Tendermint는 Propose, Prevote, Precommit 과정을 거쳐 블록을 생성합니다. 각 라운드마다 블록을 제안하며,  매 라운드에서 합의를 거쳐 블록을 생성합니다.
