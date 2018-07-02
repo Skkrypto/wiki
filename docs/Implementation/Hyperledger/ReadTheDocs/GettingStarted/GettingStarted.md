@@ -6,12 +6,13 @@
 
 ## 페브릭 SDKs
 
-페브릭은 다양한 언어를 지원하기 위해 몇가지 SDK를 지원한다. 두가지 공식 배포 SDK는 Node.js와 자바(Java)다. 
+페브릭은 다양한 언어를 지원하기 위해 몇가지 SDK를 지원한다. 두가지 공식 배포 SDK는 Node.js와 자바(Java)다.
 
 - [페브릭 Node SDK](https://github.com/hyperledger/fabric-sdk-node) 와 [Node SDK 문서](https://fabric-sdk-node.github.io/).
 - [페브릭 자바 SDK](https://github.com/hyperledger/fabric-sdk-java).
 
 추가적으로 아직 공식 배포는 안되었지만 다운로드해 사용해 볼 수 있는 SDK가 세개 있다.
+
 - [페브릭 파이썬 SDK](https://github.com/hyperledger/fabric-sdk-py).
 - [페브릭 고 SDK](https://github.com/hyperledger/fabric-sdk-go).
 - [페브릭 REST SDK](https://github.com/hyperledger/fabric-sdk-rest).
@@ -19,4 +20,3 @@
 ## 페브릭 CA
 
 페브릭은 블록체인 네트워크에서 식별정보를 설정하고 관리할 열쇠와 인증서를 생성하는 부가적인 인증기관 서비스를 제공한다. 물론 타원곡선 기반 인증서(ECDSA certificates)를 제공하는 다른 인증기관도 사용할 수 있다.
-
