@@ -10,11 +10,11 @@
 
 하지만 블록체인 기술이 나타나기 전에도 분산컴퓨팅 기술은 있었고, 분산 환경에서 쓰이는 합의 알고리즘이 있습니다. 비잔틴 장군 문제(Byzantine General Problem) - 네트워크 내에 배신자가 있더라도 합의 내용에 문제가 없으려면 어떻게 해야 하는가 - 를 해결하는 방안으로 제시된 비잔틴 장애 허용(Byzantine Fault Tolerance)과, 비잔틴 장군 문제가 발생할 수 있는 상황에서도 네트워크의 합의를 보장하는 **PBFT(Practical Byzantine Fault Tolerance)** 알고리즘을 소개하고자 합니다.
 <bR>
-
+<br>
 
 ## PBFT 이해를 위한 사전지식 - FLP Impossibility
 
-어떤 합의 알고리즘이 네트워크에서 통용되기 위해선 **Safety**와 **Liveness**라는 특성을 가지고 있어야 합니다. Safety의 의미는 “문제 없는 노드들 사이에서는 잘못된 합의가 이루어지지 않는다”입니다. 실용적인 의미로는 ‘노드 간 합의가 발생했다면, 어느 노드가 접근하든 그 값은 동일해야 한다’로 이해해도 좋습니다. Liveness는 “Transaction과 같은 합의 대상에 문제가 없다면 반드시 합의가 이루어진다”라는 의미입니다. 
+어떤 합의 알고리즘이 네트워크에서 통용되기 위해선 **Safety**와 **Liveness**라는 특성을 가지고 있어야 합니다. Safety의 의미는 ‘노드 간 합의가 발생했다면, 어느 노드가 접근하든 그 값은 동일해야 한다’입니다. 블록체인의 finality와 동일한 개념으로 이해하셔도 됩니다. Liveness는 “Transaction과 같은 합의 대상에 문제가 없다면, 네트워크 내에서 반드시 합의가 이루어진다”라는 의미입니다. 
 <Br>
 
 
@@ -28,7 +28,7 @@
 
 그런데, 비동기 네트워크 내에서는 Safety와 Liveness를 모두 완벽히 만족하는 합의 알고리즘을 설계하는 것이 불가능하다는 것이 증명되었습니다. 이 증명을 **“FLP Impossibility”**라고 합니다. 정확히 말하면, 비동기 네트워크에서는 합의 문제를 완벽히 해결할 수 있는 분산 알고리즘이 없다는 것을 증명했습니다. 1985년 4월 발표된 논문 ‘Impossibility of Distributed Consensus with One Faulty Process’에서 언급된 내용입니다. 비동기 네트워크에서는 어떤 한 노드에서 문제가 발생했을 경우 그 노드에서 합의가 됐는데 단순히 응답에 오랜 시간이 걸리는 건지, 아니면 합의 과정에서 충돌이 발생해서 응답하지 않는 건지 알 수 없기 때문입니다.
 <br>
-
+<Br>
 
 > ### 비동기 네트워크란??
 >
@@ -43,9 +43,9 @@
 
 블록체인이 구동되는 네트워크는 비동기 네트워크입니다. 따라서 비동기 네트워크에서 완벽한 합의 알고리즘은 존재하지 않습니다. 다시 말해, Safety와 Liveness를 동시에 완벽히 만족하는 합의 알고리즘을 설계할 수가 없습니다. 즉 **블록체인에서 어떤 합의 알고리즘을 채택한다는 것은, Safety와 Liveness 중 하나를 어느 정도 포기해야 한다**는 것을 말합니다.
 <br>
+<br>
 
-
-### PBFT란??
+## PBFT란??
 
 Safety를 확보하고 Liveness를 일부 희생하면서, 비동기 네트워크에서도 합의를 이룰 수 있는 알고리즘이 바로 Practical Byzantine Fault Tolerance, PBFT입니다. 즉 네트워크에 배신자 노드가 어느 정도 있다고 해도 네트워크 내에서 이루어지는 합의의 신뢰를 보장하는 알고리즘입니다. 현재까지 블록체인 합의 알고리즘 중 BFT 방식을 채택했다고 하는 경우 대부분 PBFT 합의 알고리즘을 바탕으로 조금씩 변형을 가했다고 볼 수 있습니다. 대표적으로 Tendermint는 PBFT에 DPoS 합의 알고리즘을 결합했으며, 이더리움 Casper는 PoW 방식의 채굴 위에 PoS + PBFT 형태의 블록 검증 시스템을 제안했습니다. 이외에도 PBFT는 Hyperledger Fabric, R3, Ripple, EOS에 이르기까지 Public과 Private을 가리지 않고 다양한 블록체인에서 사용되고 있습니다.
 
@@ -54,7 +54,7 @@ Safety를 확보하고 Liveness를 일부 희생하면서, 비동기 네트워�
 PBFT를 간단히 요약하자면, 비동기 네트워크에서 배신자 노드가 f개 있을 때, 총 노드 개수가 3f+1개 이상이면 해당 네트워크에서 이루어지는 합의는 신뢰할 수 있다는 것을 수학적으로 증명한 알고리즘입니다. 네트워크의 모든 노드는 거래와 같은 합의 대상의 상태를 변화할 것인지 prepared certificate와 commit certificate라는 두 번의 절차를 거쳐 결정합니다.
 
 <br>
-
+<br>
 
 
 ## PBFT 합의 알고리즘 절차 쉽게 이해하기
@@ -64,7 +64,7 @@ PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해
 
 
 ![k-308](https://user-images.githubusercontent.com/26548454/42135090-76b1f026-7d81-11e8-8134-ec46f48c981d.jpg)
-\[그림2 - PBFT 합의 알고리즘 설명. 출처: Kodebox ]
+\[그림2 - PBFT 합의 알고리즘 설명. 출처: Kodebox 세미나 자료]
 
 <br>
 
@@ -96,9 +96,12 @@ PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해
 
 ​     
 
-"prepared certificate"와 "commit certificate" 두 가지가 모두 있을 경우 해당 노드는 “committed certificate”가 되며, 클라이언트가 요청한 request를 수용해 상태 변화 함수를 시행합니다. 즉 네트워크의 합의 알고리즘이 작동하여 합의를 도출합니다. Request를 수용할 경우 네트워크 어느 노드에서도 상태 변화를 수용했기 때문에 Safety를 충족합니다. 하지만 네트워크 합의 요건을 충족하지 못한 request는 기각하기 때문에 Liveness를 일부 희생했다고 이해할 수 있습니다.
-<br>
+"prepared certificate"와 "commit certificate" 두 가지가 모두 있을 경우 해당 노드는 “committed certificate”가 되며, 클라이언트가 요청한 request를 수용해 상태 변화 함수를 시행합니다. 즉 네트워크의 합의 알고리즘이 작동하여 합의를 도출합니다. Request를 수용할 경우 네트워크 어느 노드에서도 상태 변화를 수용했기 때문에 Safety를 충족합니다. 블록체인 식으로 이해한다면, 합의를 이루어 블록이 블록체인에 올라갔다면, 어느 노드에서든 블록체인의 특정 height 블록을 검색하면 동일한 결과를 얻을 수 있습니다.
 
+하지만 네트워크 합의 요건을 충족하지 못한 request는 기각하기 때문에 Liveness를 일부 희생했다고 이해할 수 있습니다. 블록체인으로 이해한다면, 내용상 아무런 문제가 없는 블록이라 해도 2f+1 노드가 인정하지 않으면 체인에 올라갈 수 없다는 점에서 Liveness를 희생한 것입니다.
+
+<br>
+<BR>
 
 ## PBFT 합의 절차 - 두 번의 절차를 걸쳐서 합의해야만 하는 이유?
 
@@ -129,7 +132,7 @@ PBFT 합의 알고리즘 논문이 말하는 PBFT 합의 절차를 쉽게 이해
 이 결과, R2 단계에서 Commit 인증을 받은 블록은 블록1과 블록2 두 개가 됩니다. PBFT 시스템의 최대 장점은 배신자가 발생할 수 있는 비동기 네트워크에서 Safety를 보장하는 것입니다. 그런데 투표 절차가 한 번에 불과할 경우, 한 명의 배신자 노드가 네트워크 합의 시스템의 Safety를 무력화하는 상황이 발생합니다. 합의 알고리즘이 무너지는 것이죠.
 
 따라서 PBFT는 prepared certificate와 commit certificate 라는 두 번의 절차를 활용하여 배신자 노드가 존재하는 상황에서도 네트워크의 합의를 도출합니다.
-
+<br>
 
 
 ## PBFT 합의 알고리즘을 블록체인에 적용한 사례
@@ -148,6 +151,7 @@ Tendermint는 Propose, Prevote, Precommit 과정을 거쳐 블록을 생성합�
 - Tendermint에서 클라이언트가 네트워크에 블록의 생성을 Request하는 과정이 Propose입니다.
 - Propose된 블록을 각 노드가 검증하고, 검증한 결과 참인지 거짓인지를 투표하는 것이 Prevote입니다. 각 노드가 블록을 검증한 결과를 네트워크에 전달하는 것이므로 Prepare 과정에 비교할 수 있습니다. Prevote Block이 전체의 2/3이상일 경우 tendermint에서는 "polka"라고 부르는데, 이는 "prepared certificate"에 대응됩니다.
 - Prevote 이후 Precommit 과정을 다시 한 번 진행합니다. Precommit에 동의한 노드가 전체의 2/3이상일 경우 블록을 commit합니다. "commit certificate"에 대응될 수 있으며, commit에 필요한 2/3 이상의 Precommit을 얻지 못할 경우 블록을 생성하지 않고 다음 라운드로 진행합니다.
+- Tendermint에서 블록의 Validator 노드는 100개입니다.  (= 3 * 33 + 1개)
 
 
 
@@ -160,7 +164,7 @@ Tendermint는 Propose, Prevote, Precommit 과정을 거쳐 블록을 생성합�
 ## Reference
 
 - Byzantine Fault Tolerance - en.wikipedia
-- A Brief tour of FLP Impossibility
+- A Brief tour of FLP Impossibility (<http://www.the-paper-trail.org/post/2008-08-13-a-brief-tour-of-flp-impossibility/>>
 - 2018.05.23 Kodebox 세미나 - BFT Consensus Algorithm
 - Distributed Systems courses L6 - Byzantine Fault tolerance
   (https://www.youtube.com/watch?v=_e4wNoTV3Gw&t=36s) 
