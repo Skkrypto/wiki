@@ -151,6 +151,7 @@ Tendermint는 Propose, Prevote, Precommit 과정을 거쳐 블록을 생성합�
 - Tendermint에서 클라이언트가 네트워크에 블록의 생성을 Request하는 과정이 Propose입니다.
 - Propose된 블록을 각 노드가 검증하고, 검증한 결과 참인지 거짓인지를 투표하는 것이 Prevote입니다. 각 노드가 블록을 검증한 결과를 네트워크에 전달하는 것이므로 Prepare 과정에 비교할 수 있습니다. Prevote Block이 전체의 2/3이상일 경우 tendermint에서는 "polka"라고 부르는데, 이는 "prepared certificate"에 대응됩니다.
 - Prevote 이후 Precommit 과정을 다시 한 번 진행합니다. Precommit에 동의한 노드가 전체의 2/3이상일 경우 블록을 commit합니다. "commit certificate"에 대응될 수 있으며, commit에 필요한 2/3 이상의 Precommit을 얻지 못할 경우 블록을 생성하지 않고 다음 라운드로 진행합니다.
+- Tendermint에서 블록의 Validator 노드는 100개입니다.  (= 3 * 33 + 1개)
 
 
 
