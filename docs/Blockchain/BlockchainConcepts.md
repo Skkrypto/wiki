@@ -47,4 +47,4 @@ Dapp이나 DAO에서 네트워크 참여자의 자발적인 행동이 블록체�
 - 작업증명(Proof of Work, PoW)
 - 지분증명(Proof of Stake, PoS)
 - Delegated Proof of Stake(DPoS)
-   - BFT
+- Practical Byzantine Fault Tolerance(PBFT)
